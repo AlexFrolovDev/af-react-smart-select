@@ -20,7 +20,7 @@
       "plugin:storybook/recommended"
     ]
   },
-  "name": "af-smart-select",
+  "name": "af-react-smart-select",
   "peerDependencies": {
     "@storybook/addon-essentials": "^7.6.6",
     "@storybook/addon-interactions": "^7.6.6",
