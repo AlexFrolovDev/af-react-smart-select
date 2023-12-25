@@ -1,12 +1,25 @@
+
 import React, { FC } from 'react';
 import { SmartSelectWrapper } from './SmartSelect.styled';
 
-interface SmartSelectProps {}
+export type SmartSelectOptionType = {
+    label: string;
+    value: string;
+};
 
-const SmartSelect: FC<SmartSelectProps> = () => (
- <SmartSelectWrapper data-testid="SmartSelect">
+export interface SmartSelectProps {
+   disabled?: boolean;
+   placeholder?: string;
+   options: SmartSelectOptionType[];
+   multiSelect?: boolean;
+   searchable?: boolean;
+}
+
+const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
+   
+ return <SmartSelectWrapper data-testid="SmartSelect">
     SmartSelect Component
  </SmartSelectWrapper>
-);
+};
 
 export default SmartSelect;

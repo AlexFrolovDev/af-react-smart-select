@@ -5,7 +5,7 @@ import SmartSelect from './SmartSelect';
 
 describe('<SmartSelect />', () => {
   test('it should mount', () => {
-    render(<SmartSelect />);
+    render(<SmartSelect options={[]} />);
     
     const smartSelect = screen.getByTestId('SmartSelect');
 
