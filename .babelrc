@@ -3,7 +3,7 @@
     [
       "babel-plugin-styled-components",
       {
-        "namespace": "my-app"
+        "namespace": "af-ss"
       }
     ]
   ]
