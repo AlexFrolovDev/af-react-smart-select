@@ -29,6 +29,7 @@ const theme = {
     },
     dropdown: {
       width: "100%",
+      maxHeight: "200px",
     },
   },
   typography: {

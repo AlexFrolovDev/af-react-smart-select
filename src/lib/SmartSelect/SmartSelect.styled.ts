@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SmartSelectDropdownWrapper } from "./SmartSelectDropdown/SmartSelectDropdown.styled";
 
 export const SmartSelectWrapper = styled.div.attrs({
   className: "smart-select-wrapper",
@@ -19,14 +18,9 @@ export const SmartSelectContent = styled.div.attrs({
 })<ISmartSelectWrapper>`
   width: 100%;
   overflow-y: visible;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.layout.padding};
   cursor: pointer;
-
-  ${SmartSelectDropdownWrapper} {
-    ${({ open }) => {
-      if (!!open) return { display: "none" };
-    }}
-  }
 `;

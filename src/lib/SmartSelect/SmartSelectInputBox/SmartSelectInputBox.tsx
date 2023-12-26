@@ -2,10 +2,11 @@ import React, { FC } from "react";
 import { SmartSelectInputBoxWrapper } from "./SmartSelectInputBox.styled";
 import { SmartSelectInputBoxProps } from "./SmartSelectInputBox.types";
 
-const SmartSelectInputBox: FC<SmartSelectInputBoxProps> = () => {
+const SmartSelectInputBox: FC<SmartSelectInputBoxProps> = (props) => {
+  const { text, placeholder, onChange } = props;
   return (
     <SmartSelectInputBoxWrapper data-testid="SmartSelectInputBoxWrapper">
-      SmartSelectInputBoxWrapper Component
+      {text || placeholder}
     </SmartSelectInputBoxWrapper>
   );
 };

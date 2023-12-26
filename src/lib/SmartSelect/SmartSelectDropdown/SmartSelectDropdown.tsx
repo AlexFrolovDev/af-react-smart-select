@@ -1,11 +1,30 @@
 import React, { FC } from "react";
-import { SmartSelectDropdownWrapper } from "./SmartSelectDropdown.styled";
+import {
+  SmartSelectDropdownContent,
+  SmartSelectDropdownWrapper,
+} from "./SmartSelectDropdown.styled";
 import { SmartSelectDropdownProps } from "./SmartSelectDropdown.types";
+import SmartSelectOption from "./SmartSelectOption/SmartSelectOption";
 
-const SmartSelectDropdown: FC<SmartSelectDropdownProps> = () => {
+const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
+  const { options, open, selectedValues, isMultiselect, onChange } = props;
+
   return (
-    <SmartSelectDropdownWrapper data-testid="SmartSelectDropdownWrapper">
-      SmartSelectDropdownWrapper Component
+    <SmartSelectDropdownWrapper
+      open={open}
+      data-testid="SmartSelectDropdownWrapper"
+    >
+      <SmartSelectDropdownContent>
+        {options.map((option, index) => (
+          <SmartSelectOption
+            selected={selectedValues.includes(option.value)}
+            onOptionClick={onChange}
+            key={index}
+            label={option.label}
+            value={option.value}
+          />
+        ))}
+      </SmartSelectDropdownContent>
     </SmartSelectDropdownWrapper>
   );
 };
