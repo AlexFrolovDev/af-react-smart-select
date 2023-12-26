@@ -31,7 +31,9 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   ) => {
     const target = e.target as HTMLDivElement;
 
-    if (target.classList.contains("smart-select-option-content")) {
+    console.log(e.target);
+
+    if (target.classList.contains("smart-select-option_content")) {
       setIsOpen(false);
       return;
     }
