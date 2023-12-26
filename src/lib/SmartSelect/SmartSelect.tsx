@@ -74,10 +74,17 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   };
 
   const selectedLabels = useMemo(() => {
-    return selectedValues.map(
-      (value) => options.find((option) => option.value === value)?.label
-    );
-  }, [selectedValues, options]);
+    const values: string[] = [];
+
+    mockData.forEach((group) => {
+      selectedValues.forEach((value) => {
+        const item = group.items.find((item) => item.value === value);
+        item && values.push(item.label);
+      });
+    });
+
+    return values;
+  }, [selectedValues, mockData]);
 
   useEffect(() => {
     setIsOpen(false);
