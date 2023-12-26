@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import { SmartSelectContent, SmartSelectWrapper } from "./SmartSelect.styled";
-import { SmartSelectProps } from "./SmartSelect.types";
+import { SmartSelectDataType, SmartSelectProps } from "./SmartSelect.types";
 import SmartSelectInputBox from "./SmartSelectInputBox/SmartSelectInputBox";
 import SmartSelectDropdown from "./SmartSelectDropdown/SmartSelectDropdown";
 import ThemeProvider from "./theme";
@@ -25,6 +25,27 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
       label: `Option ${idx + 1}`,
       value: `option-${idx + 1}`,
     }));
+
+  const mockData: SmartSelectDataType = useMemo(() => {
+    return [
+      {
+        id: 1,
+        label: "Group 1",
+        items: new Array(20).fill(null).map((_, idx) => ({
+          label: `Option 1_${idx + 1}`,
+          value: `option-1_${idx + 1}`,
+        })),
+      },
+      {
+        id: 2,
+        label: "Group 2",
+        items: new Array(20).fill(null).map((_, idx) => ({
+          label: `Option 2_${idx + 1}`,
+          value: `option-2_${idx + 1}`,
+        })),
+      },
+    ];
+  }, []);
 
   const onContentClick: React.MouseEventHandler<HTMLDivElement> | undefined = (
     e
@@ -96,7 +117,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
           <SmartSelectDropdown
             isMultiselect={!!multiSelect}
             selectedValues={selectedValues}
-            options={options}
+            data={mockData}
             onChange={onOptionChange}
             open={isOpen}
           />

@@ -5,9 +5,10 @@ import {
 } from "./SmartSelectDropdown.styled";
 import { SmartSelectDropdownProps } from "./SmartSelectDropdown.types";
 import SmartSelectOption from "./SmartSelectOption/SmartSelectOption";
+import OptionSeparator from "./OptionSeparator/OptionSeparator";
 
 const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
-  const { options, open, selectedValues, isMultiselect, onChange } = props;
+  const { data, open, selectedValues, isMultiselect, onChange } = props;
 
   return (
     <SmartSelectDropdownWrapper
@@ -15,7 +16,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
       data-testid="SmartSelectDropdownWrapper"
     >
       <SmartSelectDropdownContent>
-        {options.map((option, index) => (
+        {/* {options.map((option, index) => (
           <SmartSelectOption
             selected={selectedValues.includes(option.value)}
             onOptionClick={onChange}
@@ -23,7 +24,25 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
             label={option.label}
             value={option.value}
           />
-        ))}
+        ))} */}
+        {data.map((group) => {
+          return (
+            <>
+              {group.label && <OptionSeparator>{group.label}</OptionSeparator>}
+              {group.items.map((item) => {
+                return (
+                  <SmartSelectOption
+                    selected={selectedValues.includes(item.value.toString())}
+                    onOptionClick={onChange}
+                    key={item.value}
+                    label={item.label}
+                    value={item.value.toString()}
+                  />
+                );
+              })}
+            </>
+          );
+        })}
       </SmartSelectDropdownContent>
     </SmartSelectDropdownWrapper>
   );

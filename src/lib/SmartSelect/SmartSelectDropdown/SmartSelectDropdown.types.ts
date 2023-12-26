@@ -1,9 +1,10 @@
+import { SmartSelectDataType } from "../SmartSelect.types";
 import { SmartSelectOptionType } from "./SmartSelectOption/SmartSelectOption.types";
 
 export interface SmartSelectDropdownProps {
   selectedValues: string[];
   isMultiselect: boolean;
-  options: SmartSelectOptionType[];
+  data: SmartSelectDataType;
   open: boolean;
   onChange: (value: string) => void;
 }
