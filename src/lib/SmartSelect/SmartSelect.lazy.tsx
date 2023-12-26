@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { SmartSelectProps } from "./SmartSelect";
+import { SmartSelectProps } from "./SmartSelect.types";
 
 const LazySmartSelect = lazy(() => import("./SmartSelect"));
 

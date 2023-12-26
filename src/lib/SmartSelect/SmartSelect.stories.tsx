@@ -5,7 +5,7 @@ export default {
   title: "SmartSelect",
 };
 
-export const Default = () => <SmartSelect options={[]} />;
+export const Default = () => <SmartSelect />;
 
 Default.story = {
   name: 'default',

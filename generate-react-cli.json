@@ -9,8 +9,11 @@
       "withTest": true,
       "withStory": true,
       "withLazy": true,
+      "withTypes": true,
       "customTemplates": {
-        "component": "grc-templates/component/TemplateName.tsx"
+        "component": "grc-templates/component/TemplateName.tsx",
+        "types": "grc-templates/types/TemplateName.types.ts",
+        "lazy": "grc-templates/lazy/TemplateName.lazy.tsx"
       }
     }
   }
