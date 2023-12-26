@@ -22,7 +22,7 @@ export interface SmartSelectProps {
   loadOnScrollToEnd?: boolean;
   data: SmartSelectDataType;
   loadDataCb?: () => void;
-  onChange?: (value: SmartSelectDataType | SmartSelectDataType[]) => void;
+  onChange?: (values: string[]) => void;
   onOpen?: () => void;
   onClose?: () => void;
 }

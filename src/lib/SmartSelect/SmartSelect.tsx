@@ -1,30 +1,15 @@
-import React, {
-  FC,
-  MouseEventHandler,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { SmartSelectContent, SmartSelectWrapper } from "./SmartSelect.styled";
 import { SmartSelectDataType, SmartSelectProps } from "./SmartSelect.types";
 import SmartSelectInputBox from "./SmartSelectInputBox/SmartSelectInputBox";
 import SmartSelectDropdown from "./SmartSelectDropdown/SmartSelectDropdown";
 import ThemeProvider from "./theme";
-import { SmartSelectOptionType } from "./SmartSelectDropdown/SmartSelectOption/SmartSelectOption.types";
 
 const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
-  const { multiSelect } = props;
+  const { multiSelect, onChange } = props;
   const contentRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
-  const options: SmartSelectOptionType[] = new Array(50)
-    .fill(null)
-    .map((_, idx) => ({
-      label: `Option ${idx + 1}`,
-      value: `option-${idx + 1}`,
-    }));
 
   const mockData: SmartSelectDataType = useMemo(() => {
     return [
@@ -88,7 +73,8 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
 
   useEffect(() => {
     setIsOpen(false);
-  }, [selectedValues]);
+    onChange && onChange(selectedValues);
+  }, [selectedValues, onChange]);
 
   useEffect(() => {
     const _contentRef = contentRef;
