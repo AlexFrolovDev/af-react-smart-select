@@ -118,7 +118,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
         >
           <SmartSelectInputBox
             text={selectedLabels.join(", ")}
-            placeholder="Select at least 1 value"
+            placeholder={props.placeholder ?? "Select value(s)"}
             onChange={() => {}}
           />
           <SmartSelectDropdown
