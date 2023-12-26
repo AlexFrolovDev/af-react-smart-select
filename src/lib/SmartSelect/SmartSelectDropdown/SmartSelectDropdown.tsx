@@ -28,13 +28,17 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
         {data.map((group) => {
           return (
             <>
-              {group.label && <OptionSeparator>{group.label}</OptionSeparator>}
+              {group.label && (
+                <OptionSeparator key={`group-id-${group.id}`}>
+                  {group.label}
+                </OptionSeparator>
+              )}
               {group.items.map((item) => {
                 return (
                   <SmartSelectOption
                     selected={selectedValues.includes(item.value.toString())}
                     onOptionClick={onChange}
-                    key={item.value}
+                    key={group.id + "" + item.value}
                     label={item.label}
                     value={item.value.toString()}
                   />

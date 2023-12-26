@@ -43,7 +43,7 @@ const PureOptionComponent = React.memo(
     ) => {
       const { label, selected, disabled } = props;
 
-      const CheckboxContents = useMemo(() => {
+      /* const CheckboxContents = useMemo(() => {
         if (selected) {
           return (
             <SmartSelectOptionCheckmark>
@@ -54,13 +54,13 @@ const PureOptionComponent = React.memo(
         }
 
         return null;
-      }, [selected, disabled]);
+      }, [selected, disabled]); */
 
       return (
         <SmartSelectOptionWrapper ref={ref} selected={selected}>
           <SmartSelectOptionContent>
             <SmartSelectOptionLabel>{label}</SmartSelectOptionLabel>
-            {CheckboxContents}
+            {selected ? <span>&#x2714;</span> : null}
           </SmartSelectOptionContent>
         </SmartSelectOptionWrapper>
       );

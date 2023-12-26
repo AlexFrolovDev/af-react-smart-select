@@ -4,9 +4,10 @@ import { SmartSelectDataType, SmartSelectProps } from "./SmartSelect.types";
 import SmartSelectInputBox from "./SmartSelectInputBox/SmartSelectInputBox";
 import SmartSelectDropdown from "./SmartSelectDropdown/SmartSelectDropdown";
 import ThemeProvider from "./theme";
+import SelectedValuesBox from "./SelectedValuesBox/SelectedValuesBox";
 
 const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
-  const { multiSelect, onChange } = props;
+  const { multiSelect = true, onChange } = props;
   const contentRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -37,7 +38,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   ) => {
     const target = e.target as HTMLDivElement;
 
-    console.log(e.target);
+    //console.log(e.target);
 
     if (target.classList.contains("smart-select-option_content")) {
       setIsOpen(false);
@@ -55,6 +56,13 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
       return prevState.includes(value)
         ? prevState.filter((item) => item !== value)
         : [...prevState, value];
+    });
+  };
+
+  const onSelectedValueRemoveClick = (indecies: string[]) => {
+    console.log("Removing values: ", indecies);
+    setSelectedValues((prevState: string[]) => {
+      return prevState.filter((_, idx) => indecies.includes(idx.toString()));
     });
   };
 
@@ -102,11 +110,17 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
           onClick={onContentClick}
           open={isOpen}
         >
-          <SmartSelectInputBox
+          <SelectedValuesBox
+            placeholder={"Select value(s)"}
+            values={selectedLabels}
+            multiselect={multiSelect}
+            onRemove={onSelectedValueRemoveClick}
+          />
+          {/* <SmartSelectInputBox
             text={selectedLabels.join(", ")}
             placeholder={props.placeholder ?? "Select value(s)"}
             onChange={() => {}}
-          />
+          /> */}
           <SmartSelectDropdown
             isMultiselect={!!multiSelect}
             selectedValues={selectedValues}
