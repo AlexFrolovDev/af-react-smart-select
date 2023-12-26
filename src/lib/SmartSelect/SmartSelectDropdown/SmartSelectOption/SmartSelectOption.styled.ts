@@ -5,7 +5,7 @@ interface OptionWrapper {
 }
 
 export const SmartSelectOptionWrapper = styled.div.attrs({
-  className: "smart-select-option-wrapper",
+  className: "smart-select-option_wrapper",
 })<OptionWrapper>`
   box-sizing: border-box;
   /* background: ${({ selected, theme }) =>
@@ -35,7 +35,7 @@ export const SmartSelectOptionWrapper = styled.div.attrs({
 `;
 
 export const SmartSelectOptionContent = styled.div.attrs({
-  className: "smart-select-option-content",
+  className: "smart-select-option_content",
 })`
   padding: ${({ theme }) => theme.layout.padding};
 `;

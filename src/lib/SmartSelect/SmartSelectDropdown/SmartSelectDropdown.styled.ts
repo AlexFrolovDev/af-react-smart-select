@@ -20,7 +20,7 @@ interface ISmartSelectDropdownContent {
 }
 
 export const SmartSelectDropdownContent = styled.div.attrs({
-  className: "samart-select-dropdown-content",
+  className: "samart-select-dropdown_content",
 })<ISmartSelectDropdownContent>`
   width: 100%;
   height: 100%;

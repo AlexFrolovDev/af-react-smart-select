@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SmartSelectWrapper = styled.div.attrs({
-  className: "smart-select-wrapper",
+  className: "smart-select_wrapper",
 })`
   width: 100%;
   overflow-y: visible;
@@ -14,7 +14,7 @@ interface ISmartSelectWrapper {
 }
 
 export const SmartSelectContent = styled.div.attrs({
-  className: "smart-select-content",
+  className: "smart-select_content",
 })<ISmartSelectWrapper>`
   width: 100%;
   overflow-y: visible;
