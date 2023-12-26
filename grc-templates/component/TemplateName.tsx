@@ -5,7 +5,7 @@ import { TemplateNameProps } from "./TemplateName.types";
 const TemplateName: FC<TemplateNameProps> = () => {
   return (
     <TemplateNameWrapper data-testid="TemplateNameWrapper">
-      TemplateNameWrapper Component
+      TemplateName Component
     </TemplateNameWrapper>
   );
 };

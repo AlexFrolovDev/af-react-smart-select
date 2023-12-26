@@ -5,7 +5,11 @@ export default {
   title: "SmartSelect",
 };
 
-export const Default = () => <SmartSelect data={[]} />;
+export const Default = () => {
+
+
+  return <div style={{width: '300px'}}><SmartSelect data={[]} /></div>
+};
 
 Default.story = {
   name: 'default',
