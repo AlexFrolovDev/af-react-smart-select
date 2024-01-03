@@ -7,6 +7,7 @@ import SelectedValuesBox from "./SelectedValuesBox/SelectedValuesBox";
 
 const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   const {
+    data = [],
     placeholder = "Select value(s)",
     multiSelect = true,
     singleLine = false,
@@ -16,27 +17,6 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
-  const mockData: SmartSelectDataType = useMemo(() => {
-    return [
-      {
-        id: 1,
-        label: "Group 1",
-        items: new Array(20).fill(null).map((_, idx) => ({
-          label: `Option 1_${idx + 1}`,
-          value: `option-1_${idx + 1}`,
-        })),
-      },
-      {
-        id: 2,
-        label: "Group 2",
-        items: new Array(20).fill(null).map((_, idx) => ({
-          label: `Option 2_${idx + 1}`,
-          value: `option-2_${idx + 1}`,
-        })),
-      },
-    ];
-  }, []);
 
   const onContentClick: React.MouseEventHandler<HTMLDivElement> | undefined = (
     e
@@ -74,7 +54,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   const selectedLabels = useMemo(() => {
     const values: string[] = [];
 
-    mockData.forEach((group) => {
+    data.forEach((group) => {
       selectedValues.forEach((value) => {
         const item = group.items.find((item) => item.value === value);
         item && values.push(item.label);
@@ -82,7 +62,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     });
 
     return values;
-  }, [selectedValues, mockData]);
+  }, [selectedValues, data]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -126,7 +106,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
           <SmartSelectDropdown
             isMultiselect={!!multiSelect}
             selectedValues={selectedValues}
-            data={mockData}
+            data={data}
             onChange={onOptionChange}
             open={isOpen}
           />
