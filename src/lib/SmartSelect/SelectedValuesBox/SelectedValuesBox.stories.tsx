@@ -5,7 +5,7 @@ export default {
   title: "SelectedValuesBox",
 };
 
-export const Default = () => <SelectedValuesBox />;
+export const Default = () => null/*  <SelectedValuesBox /> */;
 
 Default.story = {
   name: 'default',

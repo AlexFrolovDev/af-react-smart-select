@@ -7,6 +7,7 @@ interface OptionWrapper {
 export const SmartSelectOptionWrapper = styled.div.attrs({
   className: "smart-select-option_wrapper",
 })<OptionWrapper>`
+  margin-bottom: ${({theme}) => theme.layout.dropdown.optionMarginBottom};
   box-sizing: border-box;
   /* background: ${({ selected, theme }) =>
     selected ? theme.colors.darkGrey3 : "white"}; */

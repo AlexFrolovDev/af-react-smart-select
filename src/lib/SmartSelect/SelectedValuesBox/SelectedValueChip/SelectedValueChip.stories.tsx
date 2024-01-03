@@ -5,7 +5,7 @@ export default {
   title: "SelectedValueChip",
 };
 
-export const Default = () => <SelectedValueChip />;
+export const Default = () => {null/* <SelectedValueChip /> */};
 
 Default.story = {
   name: 'default',
