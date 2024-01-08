@@ -23,7 +23,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
 
   useEffect(() => {
     if (open && wrapperRef.current && positionAutoDetect) {
-      const bodyHeight = document.body.clientHeight;
+      const bodyHeight = window.innerHeight;
       const rect = wrapperRef.current.getBoundingClientRect();
 
       setIsOverflow(rect.top + Math.min(maxHeight, rect.height) > bodyHeight);

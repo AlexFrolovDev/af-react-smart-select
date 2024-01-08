@@ -18,8 +18,8 @@ export const SmartSelectDropdownWrapper = styled.div.attrs({
   width: calc(100% - 0px);
   left: 0px;
   position: absolute;
-  top: calc(10px + 2em);
-  bottom: initial;
+  top: initial;
+  bottom: ${({ theme }) => `calc(-${theme.layout.dropdown.maxHeight} - 10px)`};
 
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: ${({ theme }) => `calc(${theme.layout.padding})`};
@@ -27,8 +27,8 @@ export const SmartSelectDropdownWrapper = styled.div.attrs({
   padding-bottom: ${({ theme }) => `calc(${theme.layout.padding})`};
 
   &.position-top {
-    bottom: calc(10px + 2em);
-    top: initial;
+    bottom: initial;
+    top: ${({ theme }) => `calc(-${theme.layout.dropdown.maxHeight} - 10px)`};
   }
 `;
 
