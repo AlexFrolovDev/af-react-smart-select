@@ -26,7 +26,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     //console.log(e.target);
 
     if (target.classList.contains("smart-select-option_content")) {
-      setIsOpen(false);
+      setIsOpen(multiSelect);
       return;
     }
 
