@@ -25,7 +25,7 @@ export const Default = () => {
     },
   ]
 
-  return <div style={{width: '300px'}}><SmartSelect data={data} /></div>
+  return <div style={{width: '300px', marginTop: '300px'}}><SmartSelect data={data} /></div>
 };
 
 Default.story = {

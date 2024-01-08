@@ -13,6 +13,14 @@ export const SmartSelectDropdownWrapper = styled.div.attrs({
   display: ${({ open }) => (open ? "block" : "none")};
   max-height: ${({ theme }) => theme.layout.dropdown.maxHeight};
   margin-top: ${({ theme }) => `calc(${theme.layout.padding} * 2)`};
+
+  /* position: absolute;
+  box-sizing: border-box;
+  bottom: 40px;
+  left: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+  border-radius: 4px; */
 `;
 
 interface ISmartSelectDropdownContent {

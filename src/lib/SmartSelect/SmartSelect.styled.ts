@@ -16,6 +16,7 @@ interface ISmartSelectWrapper {
 export const SmartSelectContent = styled.div.attrs({
   className: "smart-select_content",
 })<ISmartSelectWrapper>`
+  position: relative;
   width: 100%;
   overflow-y: visible;
   box-sizing: border-box;
