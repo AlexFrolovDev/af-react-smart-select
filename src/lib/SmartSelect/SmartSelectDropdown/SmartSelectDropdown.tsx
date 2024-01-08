@@ -13,7 +13,6 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
     data,
     open,
     selectedValues,
-    isMultiselect,
     positionAutoDetect = true,
     onChange,
   } = props;

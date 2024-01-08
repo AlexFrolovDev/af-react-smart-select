@@ -104,7 +104,6 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
             onRemove={onSelectedValueRemoveClick}
           />
           <SmartSelectDropdown
-            isMultiselect={!!multiSelect}
             selectedValues={selectedValues}
             data={data}
             onChange={onOptionChange}

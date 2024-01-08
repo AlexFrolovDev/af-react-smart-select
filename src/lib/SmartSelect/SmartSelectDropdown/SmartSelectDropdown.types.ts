@@ -3,7 +3,6 @@ import { SmartSelectOptionType } from "./SmartSelectOption/SmartSelectOption.typ
 
 export interface SmartSelectDropdownProps {
   selectedValues: string[];
-  isMultiselect: boolean;
   data: SmartSelectDataType;
   open: boolean;
   positionAutoDetect?: boolean;
