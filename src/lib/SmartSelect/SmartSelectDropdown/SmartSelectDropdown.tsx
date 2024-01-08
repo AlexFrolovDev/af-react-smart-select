@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { useTheme } from "styled-components";
 import {
   SmartSelectDropdownContent,
   SmartSelectDropdownWrapper,
@@ -8,10 +9,34 @@ import SmartSelectOption from "./SmartSelectOption/SmartSelectOption";
 import OptionSeparator from "./OptionSeparator/OptionSeparator";
 
 const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
-  const { data, open, selectedValues, isMultiselect, onChange } = props;
+  const {
+    data,
+    open,
+    selectedValues,
+    isMultiselect,
+    positionAutoDetect = true,
+    onChange,
+  } = props;
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [isOverflow, setIsOverflow] = useState(false);
+  const theme = useTheme();
+  const maxHeight = parseInt(theme?.layout?.dropdown?.maxHeight);
+
+  useEffect(() => {
+    if (open && wrapperRef.current && positionAutoDetect) {
+      const bodyHeight = document.body.clientHeight;
+      const rect = wrapperRef.current.getBoundingClientRect();
+
+      setIsOverflow(rect.top + maxHeight > bodyHeight);
+    }
+
+    return () => {};
+  }, [open]);
 
   return (
     <SmartSelectDropdownWrapper
+      className={`${isOverflow ? "position-top" : ""}`}
+      ref={wrapperRef}
       open={open}
       data-testid="SmartSelectDropdownWrapper"
     >

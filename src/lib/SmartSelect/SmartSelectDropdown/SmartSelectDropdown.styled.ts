@@ -12,15 +12,24 @@ export const SmartSelectDropdownWrapper = styled.div.attrs({
   overflow-y: auto;
   display: ${({ open }) => (open ? "block" : "none")};
   max-height: ${({ theme }) => theme.layout.dropdown.maxHeight};
-  margin-top: ${({ theme }) => `calc(${theme.layout.padding} * 2)`};
-
-  /* position: absolute;
+  margin-top: initial;
+  box-shadow: 0px 10px 30px -20px black;
   box-sizing: border-box;
-  bottom: 40px;
+  width: calc(100% - 0px);
   left: 0px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: none;
-  border-radius: 4px; */
+  position: absolute;
+  top: calc(10px + 2em);
+  bottom: initial;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: ${({ theme }) => `calc(${theme.layout.padding})`};
+  padding-top: ${({ theme }) => `calc(${theme.layout.padding})`};
+  padding-bottom: ${({ theme }) => `calc(${theme.layout.padding})`};
+
+  &.position-top {
+    bottom: calc(10px + 2em);
+    top: initial;
+  }
 `;
 
 interface ISmartSelectDropdownContent {

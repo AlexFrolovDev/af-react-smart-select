@@ -6,6 +6,7 @@ export interface SmartSelectDropdownProps {
   isMultiselect: boolean;
   data: SmartSelectDataType;
   open: boolean;
+  positionAutoDetect?: boolean;
   onChange: (value: string) => void;
 }
 export type SmartSelectDropdownType = {};
