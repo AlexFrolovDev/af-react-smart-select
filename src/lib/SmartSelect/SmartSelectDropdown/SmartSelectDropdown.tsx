@@ -1,6 +1,14 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  FC,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTheme } from "styled-components";
 import {
+  SearchBoxWrapper,
   SmartSelectDropdownContent,
   SmartSelectDropdownWrapper,
 } from "./SmartSelectDropdown.styled";
@@ -14,25 +22,51 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
     open,
     selectedValues,
     positionAutoDetect = true,
+    enableSearch = false,
     onChange,
   } = props;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isOverflow, setIsOverflow] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const theme = useTheme();
   const maxHeight = parseInt(theme?.layout?.dropdown?.maxHeight);
 
+  const onSearchChange:
+    | React.ChangeEventHandler<HTMLInputElement>
+    | undefined = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value);
+  };
+
   useEffect(() => {
     if (open && wrapperRef.current && positionAutoDetect) {
-      const bodyHeight = window.innerHeight;
+      const windowHeight = window.innerHeight;
       const rect = wrapperRef.current.getBoundingClientRect();
 
-      setIsOverflow(rect.top + Math.min(maxHeight, rect.height) > bodyHeight);
+      setIsOverflow(rect.top + Math.min(maxHeight, rect.height) > windowHeight);
+      setSearchValue("");
     } else {
       setIsOverflow(false);
     }
 
     return () => {};
   }, [open]);
+
+  useEffect(() => {}, [searchValue]);
+
+  const filteredData = useMemo(() => {
+    const filtered = data
+      .map((group) => {
+        return {
+          ...group,
+          items: group.items.filter((item) =>
+            item.label.toLowerCase().includes(searchValue.toLowerCase())
+          ),
+        };
+      })
+      .filter((group) => group.items.length > 0);
+
+    return filtered;
+  }, [data, searchValue]);
 
   return (
     <SmartSelectDropdownWrapper
@@ -41,9 +75,14 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
       open={open}
       data-testid="SmartSelectDropdownWrapper"
     >
+      {enableSearch && (
+        <SearchBoxWrapper>
+          <input type="text" value={searchValue} onChange={onSearchChange} />
+        </SearchBoxWrapper>
+      )}
       {open && (
         <SmartSelectDropdownContent>
-          {data.map((group) => {
+          {filteredData.map((group) => {
             return (
               <>
                 {group.label && (

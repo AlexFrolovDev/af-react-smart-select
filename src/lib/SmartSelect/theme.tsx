@@ -29,7 +29,7 @@ const theme = {
     },
     dropdown: {
       width: "100%",
-      maxHeight: "200px",
+      maxHeight: "300px",
       optionMarginBottom: "4px",
     },
   },

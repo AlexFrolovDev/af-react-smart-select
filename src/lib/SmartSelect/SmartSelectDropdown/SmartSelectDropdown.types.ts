@@ -6,6 +6,7 @@ export interface SmartSelectDropdownProps {
   data: SmartSelectDataType;
   open: boolean;
   positionAutoDetect?: boolean;
+  enableSearch?: boolean;
   onChange: (value: string) => void;
 }
 export type SmartSelectDropdownType = {};

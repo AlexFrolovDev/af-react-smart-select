@@ -23,6 +23,7 @@ export interface SmartSelectProps {
   maxOptionsToShow?: number;
   loadOnScrollToEnd?: boolean;
   data: SmartSelectDataType;
+  enableSearch?: boolean;
   loadDataCb?: () => void;
   onChange?: (values: string[]) => void;
   onOpen?: () => void;

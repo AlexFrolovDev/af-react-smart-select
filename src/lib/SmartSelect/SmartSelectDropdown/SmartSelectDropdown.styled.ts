@@ -9,9 +9,8 @@ export const SmartSelectDropdownWrapper = styled.div.attrs({
 })<ISmartSelectDropdownWrapper>`
   width: 100%;
   overflow: hidden;
-  overflow-y: auto;
   display: ${({ open }) => (open ? "block" : "none")};
-  max-height: ${({ theme }) => theme.layout.dropdown.maxHeight};
+  height: ${({ theme }) => theme.layout.dropdown.maxHeight};
   margin-top: initial;
   box-shadow: 0px 10px 30px -20px black;
   box-sizing: border-box;
@@ -44,4 +43,21 @@ export const SmartSelectDropdownContent = styled.div.attrs({
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+`;
+
+export const SearchBoxWrapper = styled.div.attrs({
+  className: "search-box_wrapper",
+})`
+  display: flex;
+  box-sizing: border-box;
+  justify-content: stretch;
+  align-items: center;
+  padding: ${({ theme }) =>
+    `${theme.layout.padding} calc(${theme.layout.padding} * 2)`};
+  & > input {
+    flex: 1;
+    border-radius: ${({ theme }) => theme.layout.borderRadius};
+    border: 1px solid ${({ theme }) => theme.layout.borderColor};
+    padding: ${({ theme }) => theme.layout.padding};
+  }
 `;

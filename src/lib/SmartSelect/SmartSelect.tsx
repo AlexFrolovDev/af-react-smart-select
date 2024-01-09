@@ -12,6 +12,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     multiSelect = true,
     singleLine = false,
     showDeselectAllButton = true,
+    enableSearch = true,
     onChange,
   } = props;
   const contentRef = useRef<HTMLDivElement>(null);
@@ -24,6 +25,11 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     const target = e.target as HTMLDivElement;
 
     //console.log(e.target);
+
+    if (target.tagName.toLowerCase() === "input") {
+      e.stopPropagation();
+      return;
+    }
 
     if (target.classList.contains("smart-select-option_content")) {
       setIsOpen(multiSelect);
@@ -104,6 +110,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
             onRemove={onSelectedValueRemoveClick}
           />
           <SmartSelectDropdown
+            enableSearch={enableSearch}
             selectedValues={selectedValues}
             data={data}
             onChange={onOptionChange}
