@@ -1,5 +1,4 @@
 import { SmartSelectDataType } from "../SmartSelect.types";
-import { SmartSelectOptionType } from "./SmartSelectOption/SmartSelectOption.types";
 
 export interface SmartSelectDropdownProps {
   selectedValues: string[];
