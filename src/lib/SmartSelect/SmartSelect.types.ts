@@ -15,7 +15,8 @@ export interface SmartSelectProps {
   disabled?: boolean;
   placeholder?: string;
   multiSelect?: boolean;
-  singleLine?: boolean;
+  singleLineSelectedValues?: boolean;
+  singleLineSelectedValuesScroll?: boolean;
   showDeselectAllButton?: boolean;
   searchable?: boolean;
   async?: boolean;

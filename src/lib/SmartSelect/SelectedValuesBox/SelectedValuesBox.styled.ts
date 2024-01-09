@@ -10,7 +10,9 @@ export const SelectedValuesBoxWrapper = styled.div.attrs({
 
 export const ActionsBox = styled.div.attrs({
   className: "actions-box",
-})``;
+})`
+  margin-left: ${({ theme }) => theme.layout.padding};
+`;
 
 export const PlaceholderBox = styled.span.attrs({
   className: "placeholder-box",
@@ -47,6 +49,11 @@ export const ChipsWrapper = styled.div.attrs({
 
     & > div {
       margin-right: ${({ theme }) => theme.layout.gap};
+    }
+
+    &.scroll-enabled {
+      text-overflow: initial;
+      overflow-x: auto;
     }
   }
 `;

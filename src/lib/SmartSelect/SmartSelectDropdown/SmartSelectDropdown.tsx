@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  FC,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "styled-components";
 import {
   SearchBoxWrapper,

@@ -1,4 +1,11 @@
-import React, { FC, useMemo } from "react";
+import React, {
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
+import { Scrollbar } from "react-scrollbars-custom";
 import {
   ActionsBox,
   ChipsWrapper,
@@ -15,9 +22,40 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
     placeholder,
     multiselect,
     singleLine,
+    enableScroll,
     showDeselectAllButton,
     onRemove,
   } = props;
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const initialChipsHeight = useRef<number>(0);
+
+  const DefaultChipsWrapper: FC<PropsWithChildren> = ({ children }) => (
+    <ChipsWrapper
+      title={values.join(",")}
+      className={`${singleLine ? "single-line " : " "}${
+        enableScroll ? "scroll-enabled " : " "
+      }`}
+    >
+      {children}
+    </ChipsWrapper>
+  );
+
+  const ChipsWrapperWithScroll: FC<PropsWithChildren> = ({ children }) => (
+    <Scrollbar
+      style={{
+        width: wrapperRef.current?.getBoundingClientRect().width,
+        height: initialChipsHeight.current,
+      }}
+      noScrollY
+    >
+      <ChipsWrapper
+      title={values.join(",")}
+      className={`${singleLine ? "single-line " : " "}${
+        enableScroll ? "scroll-enabled " : " "
+      }`}
+    >{children}</ChipsWrapper>
+    </Scrollbar>
+  );
 
   const Chips = useMemo(() => {
     if (values.length === 0) {
@@ -25,17 +63,50 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
     }
 
     if (!multiselect && values.length === 1) {
-      return <SelectedSingleValue>{values[0]}</SelectedSingleValue>;
+      return (
+        <DefaultChipsWrapper>
+          <SelectedSingleValue>{values[0]}</SelectedSingleValue>
+        </DefaultChipsWrapper>
+      );
     }
 
-    return values.map((value, idx) => (
-      <SelectedValueChip
-        key={idx}
-        label={value}
-        onRemoveClick={() => onRemove && onRemove([idx.toString()])}
-      />
-    ));
-  }, [values, onRemove, multiselect, placeholder]);
+    if (multiselect && values.length > 0 && singleLine && enableScroll) {
+      return (
+        <ChipsWrapperWithScroll>
+          {values.map((value, idx) => (
+            <SelectedValueChip
+              key={idx}
+              label={value}
+              onRemoveClick={() => onRemove && onRemove([idx.toString()])}
+            />
+          ))}
+        </ChipsWrapperWithScroll>
+      );
+    }
+
+    console.log(props);
+
+    return (
+      <DefaultChipsWrapper>
+        {values.map((value, idx) => (
+          <SelectedValueChip
+            key={idx}
+            label={value}
+            onRemoveClick={() => onRemove && onRemove([idx.toString()])}
+          />
+        ))}
+      </DefaultChipsWrapper>
+    );
+  }, [
+    values,
+    onRemove,
+    multiselect,
+    placeholder,
+    enableScroll,
+    singleLine,
+    ChipsWrapperWithScroll,
+    DefaultChipsWrapper,
+  ]);
 
   const onRemoveAllClick = () => {
     if (!onRemove) return;
@@ -43,14 +114,16 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
     onRemove(indecies);
   };
 
+  useEffect(() => {
+    initialChipsHeight.current = wrapperRef.current?.clientHeight || 0;
+  }, []);
+
   return (
-    <SelectedValuesBoxWrapper data-testid="SelectedValuesBoxWrapper">
-      <ChipsWrapper
-        title={values.join(",")}
-        className={`${singleLine && "single-line "}`}
-      >
-        {Chips}
-      </ChipsWrapper>
+    <SelectedValuesBoxWrapper
+      ref={wrapperRef}
+      data-testid="SelectedValuesBoxWrapper"
+    >
+      {Chips}
       <ActionsBox>
         {values.length > 0 && showDeselectAllButton && (
           <span style={{ fontWeight: "bold" }} onClick={onRemoveAllClick}>

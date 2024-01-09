@@ -10,7 +10,8 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     data = [],
     placeholder = "Select value(s)",
     multiSelect = true,
-    singleLine = false,
+    singleLineSelectedValues = true,
+    singleLineSelectedValuesScroll = true,
     showDeselectAllButton = true,
     enableSearch = true,
     onChange,
@@ -24,10 +25,11 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   ) => {
     const target = e.target as HTMLDivElement;
 
+    e.stopPropagation();
+
     //console.log(e.target);
 
     if (target.tagName.toLowerCase() === "input") {
-      e.stopPropagation();
       return;
     }
 
@@ -104,8 +106,9 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
           <SelectedValuesBox
             placeholder={placeholder}
             values={selectedLabels}
-            multiselect={false}
-            singleLine={singleLine}
+            multiselect={multiSelect}
+            singleLine={singleLineSelectedValues}
+            enableScroll={singleLineSelectedValuesScroll}
             showDeselectAllButton={showDeselectAllButton}
             onRemove={onSelectedValueRemoveClick}
           />
