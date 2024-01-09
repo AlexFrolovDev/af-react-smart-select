@@ -13,7 +13,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     singleLineSelectedValues = true,
     singleLineSelectedValuesScroll = true,
     showDeselectAllButton = true,
-    enableSearch = true,
+    enableSearch = false,
     onChange,
   } = props;
   const contentRef = useRef<HTMLDivElement>(null);
