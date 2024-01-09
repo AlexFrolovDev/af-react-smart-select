@@ -89,7 +89,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
           >
             {filteredData.map((group) => {
               return (
-                <>
+                <div key={group.id}>
                   {group.label && (
                     <OptionSeparator key={`group-id-${group.id}`}>
                       {group.label}
@@ -108,7 +108,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
                       />
                     );
                   })}
-                </>
+                </div>
               );
             })}
           </Scrollbar>

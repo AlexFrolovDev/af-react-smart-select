@@ -9,7 +9,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   const {
     data = [],
     placeholder = "Select value(s)",
-    multiSelect = true,
+    multiSelect = false,
     singleLineSelectedValues = true,
     singleLineSelectedValuesScroll = true,
     showDeselectAllButton = true,
