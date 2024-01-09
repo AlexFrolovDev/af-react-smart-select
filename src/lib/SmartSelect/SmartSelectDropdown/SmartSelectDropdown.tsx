@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import { Scrollbar } from "react-scrollbars-custom";
 import { useTheme } from "styled-components";
 import {
   SearchBoxWrapper,
@@ -19,6 +20,8 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
     onChange,
   } = props;
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const searchBoxRef = useRef<HTMLDivElement>(null);
   const [isOverflow, setIsOverflow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const theme = useTheme();
@@ -69,34 +72,46 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
       data-testid="SmartSelectDropdownWrapper"
     >
       {enableSearch && (
-        <SearchBoxWrapper>
+        <SearchBoxWrapper ref={searchBoxRef}>
           <input type="text" value={searchValue} onChange={onSearchChange} />
         </SearchBoxWrapper>
       )}
       {open && (
-        <SmartSelectDropdownContent>
-          {filteredData.map((group) => {
-            return (
-              <>
-                {group.label && (
-                  <OptionSeparator key={`group-id-${group.id}`}>
-                    {group.label}
-                  </OptionSeparator>
-                )}
-                {group.items.map((item) => {
-                  return (
-                    <SmartSelectOption
-                      selected={selectedValues.includes(item.value.toString())}
-                      onOptionClick={onChange}
-                      key={group.id + "" + item.value}
-                      label={item.label}
-                      value={item.value.toString()}
-                    />
-                  );
-                })}
-              </>
-            );
-          })}
+        <SmartSelectDropdownContent ref={contentRef}>
+          <Scrollbar
+            style={{
+              width: contentRef.current?.getBoundingClientRect().width,
+              height:
+                maxHeight -
+                (searchBoxRef.current?.getBoundingClientRect().height || 0),
+            }}
+            noScrollX
+          >
+            {filteredData.map((group) => {
+              return (
+                <>
+                  {group.label && (
+                    <OptionSeparator key={`group-id-${group.id}`}>
+                      {group.label}
+                    </OptionSeparator>
+                  )}
+                  {group.items.map((item) => {
+                    return (
+                      <SmartSelectOption
+                        selected={selectedValues.includes(
+                          item.value.toString()
+                        )}
+                        onOptionClick={onChange}
+                        key={group.id + "" + item.value}
+                        label={item.label}
+                        value={item.value.toString()}
+                      />
+                    );
+                  })}
+                </>
+              );
+            })}
+          </Scrollbar>
         </SmartSelectDropdownContent>
       )}
     </SmartSelectDropdownWrapper>
