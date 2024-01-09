@@ -20,6 +20,7 @@ export const OptionSeparatorLabel = styled.div.attrs({
   background: white;
   padding: 0 0.5em;
   vertical-align: middle;
+  font-size: smaller;
 `;
 
 export const OptionSeparatorStrike = styled.div.attrs({

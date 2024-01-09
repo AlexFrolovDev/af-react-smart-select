@@ -1,6 +1,10 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { SmartSelectContent, SmartSelectWrapper } from "./SmartSelect.styled";
-import { SmartSelectProps } from "./SmartSelect.types";
+import {
+  DataGroup,
+  SmartSelectDataItem,
+  SmartSelectProps,
+} from "./SmartSelect.types";
 import SmartSelectDropdown from "./SmartSelectDropdown/SmartSelectDropdown";
 import ThemeProvider from "./theme";
 import SelectedValuesBox from "./SelectedValuesBox/SelectedValuesBox";
@@ -14,11 +18,15 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     singleLineSelectedValuesScroll = true,
     showDeselectAllButton = false,
     enableSearch = false,
-    onChange,
+    onChange = () => {},
+    onOpen = () => {},
+    onClose = () => {},
   } = props;
   const contentRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const isGroupObject = (obj: DataGroup | SmartSelectDataItem) =>
+    obj.hasOwnProperty("id") && obj.hasOwnProperty("items");
 
   const onContentClick: React.MouseEventHandler<HTMLDivElement> | undefined = (
     e
@@ -59,18 +67,26 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     });
   };
 
+  const isGroupedData = useMemo(() => {
+    return isGroupObject(data[0]);
+  }, [data]);
+
   const selectedLabels = useMemo(() => {
     const values: string[] = [];
 
     data.forEach((group) => {
       selectedValues.forEach((value) => {
-        const item = group.items.find((item) => item.value === value);
+        const item = isGroupedData
+          ? group.items!.find((item) => item.value === value)
+          : group.value === value
+          ? group
+          : null;
         item && values.push(item.label);
       });
     });
 
     return values;
-  }, [selectedValues, data]);
+  }, [selectedValues, data, isGroupedData]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -88,12 +104,15 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
 
     if (!!isOpen) {
       document.addEventListener("click", onDocumentClick, false);
+      onOpen && onOpen();
+    } else {
+      onClose && onClose();
     }
 
     return () => {
       document.removeEventListener("click", onDocumentClick, false);
     };
-  }, [isOpen]);
+  }, [isOpen, onOpen, onClose]);
 
   return (
     <ThemeProvider>

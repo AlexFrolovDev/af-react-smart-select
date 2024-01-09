@@ -9,6 +9,7 @@ import {
 import { SmartSelectDropdownProps } from "./SmartSelectDropdown.types";
 import SmartSelectOption from "./SmartSelectOption/SmartSelectOption";
 import OptionSeparator from "./OptionSeparator/OptionSeparator";
+import { DataGroup, SmartSelectDataItem } from "../SmartSelect.types";
 
 const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
   const {
@@ -26,6 +27,9 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const theme = useTheme();
   const maxHeight = parseInt(theme?.layout?.dropdown?.maxHeight);
+
+  const isGroupObject = (obj: DataGroup | SmartSelectDataItem) =>
+    obj.hasOwnProperty("id") && obj.hasOwnProperty("items");
 
   const onSearchChange:
     | React.ChangeEventHandler<HTMLInputElement>
@@ -49,20 +53,31 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
 
   useEffect(() => {}, [searchValue]);
 
-  const filteredData = useMemo(() => {
-    const filtered = data
-      .map((group) => {
-        return {
-          ...group,
-          items: group.items.filter((item) =>
-            item.label.toLowerCase().includes(searchValue.toLowerCase())
-          ),
-        };
-      })
-      .filter((group) => group.items.length > 0);
+  const isGroupedData = useMemo(() => {
+    return isGroupObject(data[0]);
+  }, [data]);
 
-    return filtered;
-  }, [data, searchValue]);
+  const filteredData = useMemo(() => {
+    if (isGroupedData) {
+      return (data as DataGroup[])
+        .map((group) => {
+          return {
+            ...(group as DataGroup),
+            items: group.items
+              ? group.items.filter((item) =>
+                  item.label.toLowerCase().includes(searchValue.toLowerCase())
+                )
+              : [],
+          };
+        })
+        .filter((group) => group.items.length > 0);
+    } else {
+      return (data as SmartSelectDataItem[]).filter(
+        (item: SmartSelectDataItem) =>
+          item.label?.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
+  }, [data, searchValue, isGroupedData]);
 
   return (
     <SmartSelectDropdownWrapper
@@ -87,27 +102,39 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
             }}
             noScrollX
           >
-            {filteredData.map((group) => {
+            {filteredData.map((group: DataGroup | SmartSelectDataItem) => {
               return (
-                <div key={group.id}>
-                  {group.label && (
+                <div key={isGroupedData ? group.id : group.value}>
+                  {isGroupedData && (
                     <OptionSeparator key={`group-id-${group.id}`}>
                       {group.label}
                     </OptionSeparator>
                   )}
-                  {group.items.map((item) => {
-                    return (
-                      <SmartSelectOption
-                        selected={selectedValues.includes(
-                          item.value.toString()
-                        )}
-                        onOptionClick={onChange}
-                        key={group.id + "" + item.value}
-                        label={item.label}
-                        value={item.value.toString()}
-                      />
-                    );
-                  })}
+                  {isGroupedData ? (
+                    group.items?.map((item: SmartSelectDataItem) => {
+                      return (
+                        <SmartSelectOption
+                          selected={selectedValues.includes(
+                            item.value.toString()
+                          )}
+                          onOptionClick={onChange}
+                          key={group.id + "" + item.value}
+                          label={item.label}
+                          value={item.value.toString()}
+                        />
+                      );
+                    })
+                  ) : (
+                    <SmartSelectOption
+                      selected={selectedValues.includes(
+                        group.value!.toString()
+                      )}
+                      onOptionClick={onChange}
+                      key={group.id + "" + group.value}
+                      label={group.label!}
+                      value={group.value!.toString()}
+                    />
+                  )}
                 </div>
               );
             })}

@@ -2,14 +2,17 @@ export type DataGroup = {
   id: string | number;
   label?: string;
   items: SmartSelectDataItem[];
+  value?: never;
 };
 
 export type SmartSelectDataItem = {
   label: string;
   value: string | number;
+  id?: never;
+  items?: never;
 };
 
-export type SmartSelectDataType = DataGroup[];
+export type SmartSelectDataType = DataGroup[] | SmartSelectDataItem[];
 
 export interface SmartSelectProps {
   disabled?: boolean;
@@ -18,14 +21,13 @@ export interface SmartSelectProps {
   singleLineSelectedValues?: boolean;
   singleLineSelectedValuesScroll?: boolean;
   showDeselectAllButton?: boolean;
-  searchable?: boolean;
-  async?: boolean;
+  /* async?: boolean;
   isLoadingData?: boolean;
   maxOptionsToShow?: number;
-  loadOnScrollToEnd?: boolean;
+  loadOnScrollToEnd?: boolean; */
   data: SmartSelectDataType;
   enableSearch?: boolean;
-  loadDataCb?: () => void;
+  /* loadDataCb?: () => void; */
   onChange?: (values: string[]) => void;
   onOpen?: () => void;
   onClose?: () => void;
