@@ -12,7 +12,7 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
     multiSelect = false,
     singleLineSelectedValues = true,
     singleLineSelectedValuesScroll = true,
-    showDeselectAllButton = true,
+    showDeselectAllButton = false,
     enableSearch = false,
     onChange,
   } = props;
