@@ -1,6 +1,7 @@
 import React, {
   FC,
   PropsWithChildren,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -29,32 +30,40 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const initialChipsHeight = useRef<number>(0);
 
-  const DefaultChipsWrapper: FC<PropsWithChildren> = ({ children }) => (
-    <ChipsWrapper
-      title={values.join(",")}
-      className={`${singleLine ? "single-line " : " "}${
-        enableScroll ? "scroll-enabled " : " "
-      }`}
-    >
-      {children}
-    </ChipsWrapper>
+  const DefaultChipsWrapper: FC<PropsWithChildren> = useCallback(
+    ({ children }) => (
+      <ChipsWrapper
+        title={values.join(",")}
+        className={`${singleLine ? "single-line " : " "}${
+          enableScroll ? "scroll-enabled " : " "
+        }`}
+      >
+        {children}
+      </ChipsWrapper>
+    ),
+    [values, enableScroll, singleLine]
   );
 
-  const ChipsWrapperWithScroll: FC<PropsWithChildren> = ({ children }) => (
-    <Scrollbar
-      style={{
-        width: wrapperRef.current?.getBoundingClientRect().width,
-        height: initialChipsHeight.current,
-      }}
-      noScrollY
-    >
-      <ChipsWrapper
-      title={values.join(",")}
-      className={`${singleLine ? "single-line " : " "}${
-        enableScroll ? "scroll-enabled " : " "
-      }`}
-    >{children}</ChipsWrapper>
-    </Scrollbar>
+  const ChipsWrapperWithScroll: FC<PropsWithChildren> = useCallback(
+    ({ children }) => (
+      <Scrollbar
+        style={{
+          width: wrapperRef.current?.getBoundingClientRect().width,
+          height: initialChipsHeight.current,
+        }}
+        noScrollY
+      >
+        <ChipsWrapper
+          title={values.join(",")}
+          className={`${singleLine ? "single-line " : " "}${
+            enableScroll ? "scroll-enabled " : " "
+          }`}
+        >
+          {children}
+        </ChipsWrapper>
+      </Scrollbar>
+    ),
+    [values, singleLine, enableScroll]
   );
 
   const Chips = useMemo(() => {
@@ -83,8 +92,6 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
         </ChipsWrapperWithScroll>
       );
     }
-
-    console.log(props);
 
     return (
       <DefaultChipsWrapper>

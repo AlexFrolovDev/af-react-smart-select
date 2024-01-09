@@ -45,7 +45,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
     }
 
     return () => {};
-  }, [open]);
+  }, [open, maxHeight, positionAutoDetect]);
 
   useEffect(() => {}, [searchValue]);
 

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { SmartSelectContent, SmartSelectWrapper } from "./SmartSelect.styled";
-import { SmartSelectDataType, SmartSelectProps } from "./SmartSelect.types";
+import { SmartSelectProps } from "./SmartSelect.types";
 import SmartSelectDropdown from "./SmartSelectDropdown/SmartSelectDropdown";
 import ThemeProvider from "./theme";
 import SelectedValuesBox from "./SelectedValuesBox/SelectedValuesBox";

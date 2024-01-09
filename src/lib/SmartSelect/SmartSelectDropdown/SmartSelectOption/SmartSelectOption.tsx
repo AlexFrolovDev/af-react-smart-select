@@ -1,7 +1,5 @@
-import React, { FC, forwardRef, useEffect, useMemo, useRef } from "react";
+import React, { FC, forwardRef, useEffect, useRef } from "react";
 import {
-  SmartSelectOptionCheckbox,
-  SmartSelectOptionCheckmark,
   SmartSelectOptionContent,
   SmartSelectOptionLabel,
   SmartSelectOptionWrapper,
@@ -41,20 +39,7 @@ const PureOptionComponent = React.memo(
       props: Omit<SmartSelectOptionProps, "onOptionClick">,
       ref: React.ForwardedRef<HTMLDivElement>
     ) => {
-      const { label, selected, disabled } = props;
-
-      /* const CheckboxContents = useMemo(() => {
-        if (selected) {
-          return (
-            <SmartSelectOptionCheckmark>
-              <div className="stem"></div>
-              <div className="kick"></div>
-            </SmartSelectOptionCheckmark>
-          );
-        }
-
-        return null;
-      }, [selected, disabled]); */
+      const { label, selected } = props;
 
       return (
         <SmartSelectOptionWrapper ref={ref} selected={selected}>
