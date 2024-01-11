@@ -35,21 +35,25 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
 
     e.stopPropagation();
 
-    //console.log(e.target);
+    //console.log(e.target, data);
 
     if (target.tagName.toLowerCase() === "input") {
+      //console.log('input, closing');
       return;
     }
 
     if (target.classList.contains("smart-select-option_content")) {
       setIsOpen(multiSelect);
+      //console.log('option hit');
       return;
     }
 
+    //console.log('toggling');
     setIsOpen((prevValue) => (prevValue ? false : true));
   };
 
   const onOptionChange = (value: string) => {
+    //console.log('option changed: ', value);
     setSelectedValues((prevState: string[]) => {
       if (!multiSelect) {
         return prevState[0] === value ? [] : [value];
@@ -89,15 +93,18 @@ const SmartSelect: FC<SmartSelectProps> = (props: SmartSelectProps) => {
   }, [selectedValues, data, isGroupedData]);
 
   useEffect(() => {
+    //console.log('value changed: ', selectedValues);
     setIsOpen(false);
     onChange && onChange(selectedValues);
-  }, [selectedValues, onChange]);
+  }, [selectedValues]);
 
   useEffect(() => {
     const _contentRef = contentRef;
 
     const onDocumentClick = (e: MouseEvent) => {
+      //console.log('document clicked !');
       if (!_contentRef.current?.contains(e.target as Node)) {
+        //console.log('closing');
         setIsOpen(false);
       }
     };

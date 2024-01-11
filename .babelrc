@@ -5,6 +5,12 @@
       {
         "namespace": "af-rss"
       }
+    ],
+    [
+      "@babel/plugin-syntax-import-attributes",
+      {
+        "deprecatedAssertSyntax": true
+      }
     ]
   ]
 }
