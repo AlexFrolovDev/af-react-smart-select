@@ -1,2 +1,2 @@
-export { default } from "./SmartSelect/SmartSelect";
-export * from "./SmartSelect/SmartSelect.types";
+export { default } from "./SmartSelect/SmartSelect.tsx";
+export * from "./SmartSelect/SmartSelect.types.ts";
