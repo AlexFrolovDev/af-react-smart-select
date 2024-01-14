@@ -1,6 +1,6 @@
 /* eslint-disable */
 import type { Meta, StoryObj } from "@storybook/react";
-import SmartSelect from "../../../lib/esm/index.js";
+import SmartSelect from "./SmartSelect";
 
 const data = [
   {
