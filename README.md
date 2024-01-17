@@ -1,6 +1,8 @@
-# AF-REACT-SELECT
+# AF-REACT-SMART-SELECT
 
-Lightweight Select component built for React applications. [Example](https://codesandbox.io/p/sandbox/af-react-smart-select-mr7wpz)
+Lightweight Select component built for React applications. [Example](https://codesandbox.io/p/sandbox/af-react-smart-select-mr7wpz).
+
+***Note:** StrictMode will cause a crash because of react-scrollbars-custom bug. Working on it*
 
 **Features:**
 
