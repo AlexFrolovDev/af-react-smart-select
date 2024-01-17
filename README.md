@@ -1,6 +1,6 @@
 # AF-REACT-SELECT
 
-Lightweight Select component built for React applications.
+Lightweight Select component built for React applications. [Example](https://codesandbox.io/p/sandbox/af-react-smart-select-mr7wpz)
 
 **Features:**
 
