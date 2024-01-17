@@ -1,4 +1,11 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Scrollbar } from "react-scrollbars-custom";
 import { useTheme } from "styled-components";
 import {
@@ -23,7 +30,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const searchBoxRef = useRef<HTMLDivElement>(null);
-  const [isOverflow, setIsOverflow] = useState(false);
+  const [showOnTop, setShowOnTop] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const theme = useTheme();
   const maxHeight = parseInt(theme?.layout?.dropdown?.maxHeight);
@@ -37,15 +44,17 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
     setSearchValue(e.currentTarget.value);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open && wrapperRef.current && positionAutoDetect) {
       const windowHeight = window.innerHeight;
       const rect = wrapperRef.current.getBoundingClientRect();
+      let hasBottomSpace = rect.top + rect.height < windowHeight;
+      let hasTopSpace = rect.top > 0;
 
-      setIsOverflow(rect.top + Math.min(maxHeight, rect.height) > windowHeight);
+      setShowOnTop(hasBottomSpace ? false : hasTopSpace);
       setSearchValue("");
     } else {
-      setIsOverflow(false);
+      setShowOnTop(false);
     }
 
     return () => {};
@@ -81,7 +90,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
 
   return (
     <SmartSelectDropdownWrapper
-      className={`${isOverflow ? "position-top" : ""}`}
+      className={`${showOnTop ? "position-top" : ""}`}
       ref={wrapperRef}
       open={open}
       data-testid="SmartSelectDropdownWrapper"

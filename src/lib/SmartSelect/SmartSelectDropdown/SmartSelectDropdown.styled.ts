@@ -10,7 +10,7 @@ export const SmartSelectDropdownWrapper = styled.div.attrs({
   width: 100%;
   overflow: hidden;
   display: ${({ open }) => (open ? "block" : "none")};
-  height: ${({ theme }) => theme.layout.dropdown.maxHeight};
+  max-height: ${({ theme }) => theme.layout.dropdown.maxHeight};
   margin-top: initial;
   box-shadow: 0px 10px 30px -20px black;
   box-sizing: border-box;
