@@ -6,7 +6,8 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import { Scrollbar } from "react-scrollbars-custom";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 import {
   ActionsBox,
   ChipsWrapper,
@@ -46,12 +47,10 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
 
   const ChipsWrapperWithScroll: FC<PropsWithChildren> = useCallback(
     ({ children }) => (
-      <Scrollbar
+      <SimpleBar
         style={{
-          width: wrapperRef.current?.getBoundingClientRect().width,
-          height: initialChipsHeight.current,
+          maxHeight: initialChipsHeight.current,
         }}
-        noScrollY
       >
         <ChipsWrapper
           title={values.join(",")}
@@ -61,7 +60,7 @@ const SelectedValuesBox: FC<SelectedValuesBoxProps> = (props) => {
         >
           {children}
         </ChipsWrapper>
-      </Scrollbar>
+      </SimpleBar>
     ),
     [values, singleLine, enableScroll]
   );

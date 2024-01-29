@@ -6,7 +6,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Scrollbar } from "react-scrollbars-custom";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 import { useTheme } from "styled-components";
 import {
   SearchBoxWrapper,
@@ -102,14 +103,12 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
       )}
       {open && (
         <SmartSelectDropdownContent ref={contentRef}>
-          <Scrollbar
+          <SimpleBar
             style={{
-              width: contentRef.current?.getBoundingClientRect().width,
-              height:
+              maxHeight:
                 maxHeight -
                 (searchBoxRef.current?.getBoundingClientRect().height || 0),
             }}
-            noScrollX
           >
             {filteredData.map((group: DataGroup | SmartSelectDataItem) => {
               return (
@@ -147,7 +146,7 @@ const SmartSelectDropdown: FC<SmartSelectDropdownProps> = (props) => {
                 </div>
               );
             })}
-          </Scrollbar>
+          </SimpleBar>
         </SmartSelectDropdownContent>
       )}
     </SmartSelectDropdownWrapper>

@@ -2,7 +2,6 @@
 
 Lightweight Select component built for React applications. [Example](https://codesandbox.io/p/sandbox/af-react-smart-select-mr7wpz).
 
-***Note:** StrictMode will cause a crash because of react-scrollbars-custom bug. Working on it*
 
 **Features:**
 
@@ -10,7 +9,7 @@ Lightweight Select component built for React applications. [Example](https://cod
 * Search option
 * Grouping for option items
 * Single or Multiple Select option with delete icon
-* Implemented using [styled-components](https://www.npmjs.com/package/styled-components), [react-scrollbars-custom](https://www.npmjs.com/package/react-scrollbars-custom)
+* Implemented using [styled-components](https://www.npmjs.com/package/styled-components)
 
 **Props and Types**
 

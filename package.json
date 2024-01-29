@@ -23,8 +23,8 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scrollbars-custom": "^4.1.1",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "simplebar-react": "^3.2.4"
   },
   "private": false,
   "repository": {
@@ -87,5 +87,7 @@
     "lib/index.js",
     "lib/index.d.ts"
   ],
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "dependencies": {
+  }
 }
