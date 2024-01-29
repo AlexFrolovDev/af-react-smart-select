@@ -39,7 +39,7 @@
     "test": "react-scripts test",
     "rollup-build-lib": "rollup -c"
   },
-  "version": "0.1.6",
+  "version": "0.1.7",
   "devDependencies": {
     "@babel/plugin-syntax-import-attributes": "^7.23.3",
     "@rollup/plugin-commonjs": "^25.0.7",
